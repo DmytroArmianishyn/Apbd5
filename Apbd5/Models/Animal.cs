@@ -2,11 +2,11 @@
 
 public class Animal
 {
-    private int _id { get; set; }
-    private string _name { get; set; }
-    private string _description { get; set; }
-    private string _category { get; set; }
-    private int _area { get; set; }
+    public int _id { get; set; }
+    public string _name { get; set; }
+    public string _description { get; set; }
+    public string _category { get; set; }
+    public int _area { get; set; }
 
     public Animal(int id, string name, string description, string category, int area)
     {

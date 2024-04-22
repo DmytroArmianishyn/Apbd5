@@ -1,7 +1,7 @@
-﻿using Apbd5.Models;
+﻿using Apbd5.Dto;
+using Apbd5.Models;
 using Apbd5.Service;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 
 namespace Apbd5.Controllers;
 [ApiController]
@@ -16,15 +16,43 @@ public class AnimalController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpGet]
+    [HttpGet("/api/animals")]
     public IActionResult GetAnimals()
     {
         var animals = animalService.GetAnimals(_configuration);
         return Ok(animals);
-
-
+    }
+    [HttpGet("/api/animals/{sort}")]
+    public IActionResult GetAnimalsbySort(String sort)
+    {
+        var animals = animalService.GetAnimalsort(_configuration,sort);
+        return Ok(animals);
     }
 
+    [HttpPost("/api/animals")]
+    public IActionResult Postanimal(Animal animal)
+    {
+   animalService.Postanimal(_configuration, animal);
+       return Created();
+    }
+
+    [HttpPut("/api/animals")]
+    public IActionResult Putanimal(int id, DtoAnimalNoID animalNoId)
+    {
+        animalService.PutAnimal(_configuration,id,animalNoId);
 
 
+        return Created();
+    }
+    [HttpDelete("/api/animals")]
+    public IActionResult Deleteanimal(int id)
+    {
+        animalService.DeleteAnimal(_configuration,id);
+
+
+        return Created();
+    }
+    
+    
+    
 }
